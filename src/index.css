@@ -1,0 +1,294 @@
+@import "tailwindcss";
+
+/* 
+ * tweakcn - Sistema de Design Customizado
+ * Inspirado em shadcn/ui com tokens personalizados
+ */
+
+@theme {
+  /* ===== FONTES ===== */
+  --font-family-sans: 'Roboto', ui-sans-serif, system-ui, sans-serif;
+  --font-family-serif: 'Playfair Display', ui-serif, Georgia, serif;
+  --font-family-mono: 'Fira Code', ui-monospace, 'Courier New', monospace;
+
+  /* ===== CORES - TEMA CLARO (Paleta solicitada) ===== */
+  /* Fundo: Branco Gelo */
+  --color-background: #F2F3F4;
+  /* Texto principal: Cinza Grafite */
+  --color-foreground: #4A4952;
+
+  --color-card: #F2F3F4;
+  --color-card-foreground: #4A4952;
+
+  --color-popover: #F2F3F4;
+  --color-popover-foreground: #4A4952;
+
+  /* Primary: Verde Malaquita */
+  --color-primary: #03C03C;
+  --color-primary-foreground: #1F1E26;
+
+  /* Secondary: Verde Amarelado */
+  --color-secondary: #A2D43D;
+  --color-secondary-foreground: #1F1E26;
+
+  --color-muted: #F2F3F4;
+  --color-muted-foreground: #4A4952;
+
+  --color-accent: #03C03C;
+  --color-accent-foreground: #1F1E26;
+
+  --color-destructive: oklch(60% 0.19 27);
+  --color-destructive-foreground: oklch(98% 0 0);
+
+  --color-border: #E6E7EA;
+  --color-input: #E6E7EA;
+  --color-ring: #03C03C;
+
+  /* Cores para gráficos adaptadas */
+  --color-chart-1: #03C03C; /* Verde Malaquita */
+  --color-chart-2: #A2D43D; /* Verde Amarelado */
+  --color-chart-3: #1F1E26; /* Preto Brilhante */
+  --color-chart-4: #4A4952; /* Cinza Grafite */
+  --color-chart-5: #A2D43D; /* apoio */
+
+  /* ===== ESPAÇAMENTOS E RAIOS ===== */
+  --radius-lg: 0.75rem;
+  --radius-md: calc(0.75rem - 2px);
+  --radius-sm: calc(0.75rem - 4px);
+}
+
+/* ===== TEMA ESCURO ===== */
+@media (prefers-color-scheme: dark) {
+  @theme {
+    --color-background: oklch(16% 0.01 240);
+    --color-foreground: oklch(98% 0 0);
+    
+    --color-card: oklch(19% 0.01 240);
+    --color-card-foreground: oklch(98% 0 0);
+    
+    --color-popover: oklch(19% 0.01 240);
+    --color-popover-foreground: oklch(98% 0 0);
+    
+    /* Primary: Verde mais claro para contraste */
+    --color-primary: oklch(56% 0.14 155);
+    --color-primary-foreground: oklch(20% 0.08 155);
+    
+    --color-secondary: oklch(27% 0.01 240);
+    --color-secondary-foreground: oklch(98% 0 0);
+    
+    --color-muted: oklch(27% 0.01 240);
+    --color-muted-foreground: oklch(65% 0.01 240);
+    
+    --color-accent: oklch(56% 0.14 155);
+    --color-accent-foreground: oklch(20% 0.08 155);
+    
+    --color-destructive: oklch(40% 0.14 27);
+    --color-destructive-foreground: oklch(98% 0 0);
+    
+    --color-border: oklch(27% 0.01 240);
+    --color-input: oklch(27% 0.01 240);
+    --color-ring: oklch(56% 0.14 155);
+    
+    /* Cores para gráficos - tema escuro */
+    --color-chart-1: oklch(60% 0.14 240); /* Azul */
+    --color-chart-2: oklch(55% 0.12 160); /* Verde água */
+    --color-chart-3: oklch(65% 0.16 95);  /* Amarelo claro */
+    --color-chart-4: oklch(70% 0.13 300); /* Roxo */
+    --color-chart-5: oklch(65% 0.15 350); /* Rosa */
+  }
+}
+
+/* ===== ESTILOS BASE ===== */
+@layer base {
+  /* Reset de bordas */
+  * {
+    @apply border-border;
+  }
+
+  /* Estilos do body */
+  body {
+    @apply bg-background text-foreground antialiased overflow-x-hidden;
+    font-family: var(--font-family-sans);
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  .container {
+    width: min(100%, 1200px);
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  /* Aplicar fonte serif em títulos */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-serif);
+  }
+
+  /* Aplicar fonte mono em códigos e valores */
+  code, kbd, samp, pre {
+    font-family: var(--font-family-mono);
+  }
+}
+
+/* ===== UTILITÁRIOS CUSTOMIZADOS ===== */
+@layer utilities {
+  /* Utilitário para fonte sans */
+  .font-sans {
+    font-family: var(--font-family-sans);
+  }
+
+  /* Utilitário para fonte serif */
+  .font-serif {
+    font-family: var(--font-family-serif);
+  }
+
+  /* Utilitário para fonte mono */
+  .font-mono {
+    font-family: var(--font-family-mono);
+  }
+}
+
+/* ===== ANIMAÇÕES CUSTOMIZADAS ===== */
+@keyframes slide-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ===== CLASSES DE ANIMAÇÃO ===== */
+.animate-slide-left {
+  animation: slide-left 30s linear infinite;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.4s ease-out;
+}
+
+/* ===== TEMA DARK (classe manual) ===== */
+.dark {
+  color-scheme: dark;
+  
+  --color-background: oklch(16% 0.01 240);
+  --color-foreground: oklch(98% 0 0);
+  
+  --color-card: oklch(19% 0.01 240);
+  --color-card-foreground: oklch(98% 0 0);
+  
+  --color-popover: oklch(19% 0.01 240);
+  --color-popover-foreground: oklch(98% 0 0);
+  
+  --color-primary: oklch(56% 0.14 155);
+  --color-primary-foreground: oklch(20% 0.08 155);
+  
+  --color-secondary: oklch(27% 0.01 240);
+  --color-secondary-foreground: oklch(98% 0 0);
+  
+  --color-muted: oklch(27% 0.01 240);
+  --color-muted-foreground: oklch(65% 0.01 240);
+  
+  --color-accent: oklch(56% 0.14 155);
+  --color-accent-foreground: oklch(20% 0.08 155);
+  
+  --color-destructive: oklch(40% 0.14 27);
+  --color-destructive-foreground: oklch(98% 0 0);
+  
+  --color-border: oklch(27% 0.01 240);
+  --color-input: oklch(27% 0.01 240);
+  --color-ring: oklch(56% 0.14 155);
+  
+  --color-chart-1: oklch(60% 0.14 240);
+  --color-chart-2: oklch(55% 0.12 160);
+  --color-chart-3: oklch(65% 0.16 95);
+  --color-chart-4: oklch(70% 0.13 300);
+  --color-chart-5: oklch(65% 0.15 350);
+}
+
+/* ===== SUPORTE A BACKDROP FILTER ===== */
+@supports (backdrop-filter: blur(1px)) {
+  .backdrop-blur {
+    backdrop-filter: blur(10px);
+  }
+}
+
+/* ===== SCROLLBAR CUSTOMIZADA ===== */
+@layer utilities {
+  /* Scrollbar para tema claro */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-muted);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-primary);
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: oklch(from var(--color-primary) calc(l * 0.9) c h);
+  }
+
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary) var(--color-muted);
+  }
+}
+
+/* ===== FOCUS VISIBLE ===== */
+@layer base {
+  *:focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+  }
+}
+
+/* ===== TRANSIÇÕES SUAVES ===== */
+@layer base {
+  * {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+}
